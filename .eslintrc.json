@@ -31,9 +31,9 @@
 		"import/newline-after-import": "off",
 		"@typescript-eslint/no-empty-interface": "off",
 		"@typescript-eslint/explicit-module-boundary-types": "error",
-		"@typescript-eslint/no-unused-vars": "error",
+		"@typescript-eslint/no-unused-vars": "warn",
 		"prettier/prettier": [
-			"error",
+			"warn",
 			{
 				"singleQuote": true,
 				"trailingComma": "es5",
@@ -43,13 +43,13 @@
 			}
 		],
 		"import/no-extraneous-dependencies": [
-			"error",
+			"warn",
 			{
 				"devDependencies": true
 			}
 		],
-		"no-use-before-define": "off",
-		"@typescript-eslint/no-use-before-define": ["error"],
+		"no-use-before-define": "warn",
+		"@typescript-eslint/no-use-before-define": ["warn"],
 		"react/jsx-filename-extension": [
 			"warn",
 			{
@@ -57,7 +57,7 @@
 			}
 		],
 		"import/extensions": [
-			"error",
+			"warn",
 			"ignorePackages",
 			{
 				"ts": "never",
@@ -65,8 +65,8 @@
 			}
 		],
 		"no-shadow": "off",
-		"@typescript-eslint/no-shadow": ["error"],
-		"react-hooks/rules-of-hooks": "error",
+		"@typescript-eslint/no-shadow": ["warn"],
+		"react-hooks/rules-of-hooks": "warn",
 		"react-hooks/exhaustive-deps": "off",
 		"react/react-in-jsx-scope": "off",
 		"react/jsx-props-no-spreading": "off",
@@ -76,16 +76,24 @@
 		"react/prop-types": "off",
 		"no-plusplus": "off",
 		"@typescript-eslint/no-empty-function": "off",
-		"@typescript-eslint/no-explicit-any": ["error"],
-		"no-console": "error",
+		"@typescript-eslint/no-explicit-any": ["warn"],
+		"no-console": "warn",
 		"spellcheck/spell-checker": [
-			"error",
+			"warn",
 			{
 				"comments": true,
 				"strings": true,
 				"identifiers": true,
 				"templates": true,
-				"skipWords": ["persistor"],
+				"skipWords": [
+					"persistor",
+					"onPerfEntry",
+					"Perf",
+					"dom",
+					"matchers",
+					"axios",
+					"Spotify"
+				],
 				"minLength": 3
 			}
 		]

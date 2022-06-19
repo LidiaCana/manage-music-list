@@ -1,17 +1,18 @@
 import { AnyAction } from 'redux';
+import { UserToken } from '../../types/api';
 import ActionTypes from '../type';
 
-interface ISetCode extends AnyAction {
-	payload: string | null;
+interface IUserToken extends AnyAction {
+	payload: UserToken | null;
 }
-export type AuthAction = ISetCode;
+export type AuthAction = IUserToken;
 
 export interface AuthState {
-	code: string | null;
+	userToken: UserToken | null;
 }
 
 export const initialState: AuthState = {
-	code: null,
+	userToken: null,
 };
 
 export default function authReducer(
@@ -19,10 +20,10 @@ export default function authReducer(
 	action: AuthAction
 ): AuthState {
 	switch (action.type) {
-		case ActionTypes.SET_CODE: {
+		case ActionTypes.LOGIN_SUCCESS: {
 			return {
 				...state,
-				code: <string>action.payload,
+				userToken: <UserToken>action.payload,
 			};
 		}
 

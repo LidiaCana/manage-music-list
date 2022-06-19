@@ -1,19 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
+import { ServerResponse, UserToken } from '../../types/api';
 import AUTH from '../endpoints';
-
-export interface ServerResponse<T> {
-	data: T;
-}
-interface IAuth {
-	token: string;
-}
 
 function LoginService(
 	code: string
-): Promise<AxiosResponse<ServerResponse<IAuth>, IAuth>> {
-	return axios.post<ServerResponse<IAuth>>(AUTH.LOGIN(), {
-		code,
-	});
+): Promise<AxiosResponse<ServerResponse<UserToken>, UserToken>> {
+	return axios.post<ServerResponse<UserToken>>(AUTH.LOGIN(), { code });
 }
 
 export default LoginService;

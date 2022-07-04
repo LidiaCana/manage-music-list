@@ -1,6 +1,7 @@
-import EnvironmentVariables from '../constats/enviromentVariables';
-
-const AUTH = {
-	LOGIN: (): string => `${EnvironmentVariables.API_URL}/login`,
+export const AUTH = {
+	LOGIN: (code: string): string => `/auth/login?code=${code}`,
 };
-export default AUTH;
+
+export const SPOTIFY = {
+	GET_RELEASE: '/spotify/new-release',
+};

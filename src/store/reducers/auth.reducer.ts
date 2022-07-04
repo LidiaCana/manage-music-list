@@ -7,6 +7,12 @@ interface IUserToken extends AnyAction {
 }
 export type AuthAction = IUserToken;
 
+export type IUser = {
+	name: string;
+	email: string;
+	id: string;
+	images: any[];
+};
 export interface AuthState {
 	userToken: UserToken | null;
 }
@@ -24,6 +30,12 @@ export default function authReducer(
 			return {
 				...state,
 				userToken: <UserToken>action.payload,
+			};
+		}
+		case ActionTypes.LOG_OUT: {
+			return {
+				...state,
+				userToken: null,
 			};
 		}
 

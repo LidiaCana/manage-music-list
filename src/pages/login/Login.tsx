@@ -1,8 +1,25 @@
+import './_Login.style.scss';
+import Cover from '../../assets/images/cover1.png';
+
 const Login: React.FC = () => {
 	const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
+
 	return (
-		<div>
-			<a href={AUTH_URL}>Login</a>
+		<div className="login-screen">
+			<section className="login-container">
+				<div className="col-left">
+					<div className="welcome-message">
+						<h3>Welcome</h3>
+						<span>Login with spotify account</span>
+						<a className="btn btn-primary btn-animated" href={AUTH_URL}>
+							Login
+						</a>
+					</div>
+				</div>
+			</section>
+			<div className="login-image">
+				<img src={Cover} alt="logo" />
+			</div>
 		</div>
 	);
 };

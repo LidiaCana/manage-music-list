@@ -1,0 +1,14 @@
+@import '../../../style/variables';
+
+.song-card {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	span {
+		margin: 0px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		width: 114px;
+		white-space: nowrap;
+	}
+}

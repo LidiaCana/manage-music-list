@@ -1,17 +1,16 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import SpotifyService, { Items } from '../../api/service/spotify.service';
-import Layout from '../../components/Layout';
+import SongCard from '../../components/cards/SongCard';
+import Layout from '../../components/layout/Layout';
 import { useAppDispatch, useAppSelector } from '../../hooks/appState';
-import Path from '../../routes/paths';
-import { Login, Logout } from '../../store/actions/auth.actions';
+import { Login } from '../../store/actions/auth.actions';
+import './_Dashboard.style.scss';
 
 export interface Props {}
 const Dashboard: React.FC = () => {
 	const code = new URLSearchParams(window.location.search).get('code');
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
+
 	const user = useAppSelector((state) => state.auth.userToken?.user);
 
 	const [release, setNewRelease] = useState<Items[]>([]);
@@ -27,32 +26,61 @@ const Dashboard: React.FC = () => {
 		}
 	}, []);
 
-	const handleOnLogout = () => {
-		dispatch(Logout());
-		navigate(Path.LOGIN);
-	};
 	const getRelease = async () => {
-		const {
-			status,
-			data: { data },
-		} = await SpotifyService.getRelease();
-		if (status === 201) {
-			setNewRelease(data.playlists.items);
+		try {
+			const {
+				status,
+				data: { data },
+			} = await SpotifyService.getRelease();
+			if (status === 201) {
+				setNewRelease(data.playlists.items);
+			}
+		} catch (error) {
+			// TODO: Apply toast display error
+		}
+	};
+	const getMyLibrary = async () => {
+		try {
+			if (user) {
+				const {
+					status,
+					data: { data },
+				} = await SpotifyService.getMyLibrary();
+				if (status === 201) {
+					setNewRelease(data.playlists.items);
+				}
+			}
+		} catch (error) {
+			// TODO: Apply toast display error
 		}
 	};
 	useEffect(() => {
 		if (user) {
 			getRelease();
+			getMyLibrary();
 		}
 	}, [user]);
 	return (
 		<Layout>
-			<div>
-				<h1>Welcome</h1>
-				<button type="button" onClick={handleOnLogout}>
-					Logout
-				</button>
-			</div>
+			<>
+				<section data-testId="new-release" className="">
+					<h1>New Release</h1>
+					<div className="new-release-container">
+						{release.map(({ name, id, images }) => (
+							<SongCard
+								key={id}
+								title={name}
+								cover={images[0].url}
+								isAdded={false}
+								onClick={(e) => console.log(e)}
+							/>
+						))}
+					</div>
+				</section>
+				<section data-testId="result-search">
+					<h3>Result</h3>
+				</section>
+			</>
 		</Layout>
 	);
 };

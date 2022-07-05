@@ -4,4 +4,5 @@ export const AUTH = {
 
 export const SPOTIFY = {
 	GET_RELEASE: '/spotify/new-release',
+	GET_MY_LIBRARY: '/spotify/my-library',
 };

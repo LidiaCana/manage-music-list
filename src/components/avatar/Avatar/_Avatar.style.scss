@@ -1,0 +1,17 @@
+@import '../../../style/variables';
+
+@mixin random-bgr() {
+	background-color: rgb(random(255), random(255), random(255));
+}
+.avatar {
+	@include random-bgr();
+	width: 4vh;
+	height: 4vh;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	border-radius: 50%;
+	h2 {
+		color: white;
+	}
+}
